@@ -30,6 +30,11 @@ SHOTS = {
     "SH11_FINAL_WIDE":          ("world", (-700, 520, 240), (0, -10, 30), 32, "NO", "Pull-back over the ocean, the resort on its spur"),
 }
 
+# artistic depth of field on the ground-level shots: f-stop, focus on the shot's target point
+DOF = {"SH03_APPROACH_AVENUE": 8.0, "SH04_ENTRANCE_KASBAH": 8.0, "SH05_GARDEN_REVEAL": 5.6,
+       "SH06_PERGOLA_TERRACE": 4.0, "SH07_ROOFTOP_JACUZZI": 8.0, "SH08_POOL_PAVILLON": 5.6,
+       "SH09_DETAIL_NICHES": 2.8, "SH10_SUNSET_LAKE": 5.6}
+
 
 def hero_frame():
     import bpy
@@ -71,7 +76,7 @@ def build():
         cam.sensor_fit = "VERTICAL"
         cam.sensor_height = 36.0
         cam.clip_start = 0.05
-        cam.clip_end = 20000
+        cam.clip_end = 150000          # horizon from 200 m is ~50 km away
         C.remove_object(name)
         ob = bpy.data.objects.new(name, cam)
         col.objects.link(ob)
@@ -83,6 +88,10 @@ def build():
             T = resolve("world" if frame == "coast" else frame, tgt)
             d = Vector(T) - Vector(P)
             ob.rotation_euler = d.to_track_quat("-Z", "Y").to_euler()
+            if name in DOF:
+                cam.dof.use_dof = True
+                cam.dof.aperture_fstop = DOF[name]
+                cam.dof.focus_distance = d.length
         ob["purpose"] = purpose
         ob["higgsfield"] = hf
         ground = float(C.TERRAIN_HEIGHT(np.array([P[:2]]))[0])
