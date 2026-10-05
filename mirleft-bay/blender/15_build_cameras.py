@@ -20,7 +20,7 @@ SHOTS = {
     "SH01_ESTABLISHING_AERIAL": ("world", (520, -260, 150), (-170, 90, 15), 28, "NO", "Backlit establishing: the spur from the road side, resort, beach and Atlantic horizon"),
     "SH02_AERIAL_TOPDOWN":      ("top", (3780, 2400, 820), None, 50, "NO", "Masterplan read top-down, axis vertical in the 9:16 frame"),
     "SH03_APPROACH_AVENUE":     ("plan", (4470, 2456, 1.7), (3000, 2445, 3.5), 35, "YES", "Date-palm avenue towards the ocean and the low sun"),
-    "SH04_ENTRANCE_KASBAH":     ("plan", (5395, 2150, 1.4), (5545, 2105, 7.5), 20, "YES", "Reception towers, low angle, warm side light"),
+    "SH04_ENTRANCE_KASBAH":     ("plan", (5490, 2238, 1.5), (5590, 2080, 7.0), 20, "YES", "Market / reception towers from the plaza, low angle, warm side light"),
     "SH05_GARDEN_REVEAL":       ("hero", (-11.0, -5.6, 1.6), (-5.0, -1.6, 3.3), 22, "YES", "Duplex garden facade, pergola, terrace, lawn"),
     "SH06_PERGOLA_TERRACE":     ("hero", (-2.2, -2.4, 4.95), (-30.0, -9.0, 3.2), 22, "YES", "Under the pergola looking out to the sunset"),
     "SH07_ROOFTOP_JACUZZI":     ("hero", (4.2, -3.2, 8.1), (-40.0, -14.0, 1.0), 20, "YES", "Roof terrace, jacuzzi, horizon"),
@@ -29,7 +29,8 @@ SHOTS = {
     "SH10_SUNSET_LAKE":         ("plan", (2080, 2470, 1.6), (1250, 2330, 3.0), 30, "YES", "Lake park looking west, palms against the sun"),
     "SH11_FINAL_WIDE":          ("world", (-700, 520, 240), (0, -10, 30), 32, "NO", "Pull-back over the ocean, the resort on its spur"),
     "SH12_RESIDENCE_STREETS":   ("plan", (3600, 2950, 70), (3700, 2500, 0), 24, "NO", "Low aerial over road 7 and the boulevard between the villas"),
-    "SH13_ENTRANCE_PARKING":    ("plan", (6250, 2700, 95), (5950, 2250, 0), 24, "NO", "Entrance: roundabout, parking fields, kasbah reception"),
+    "SH13_ENTRANCE_PARKING":    ("plan", (6250, 2700, 95), (5950, 2250, 0), 24, "NO", "Entrance: diagonal street, mall, sports block, parking lots"),
+    "SH14_TRANCHE1_AERIAL":     ("plan", (5250, 3000, 90), (5250, 2250, 0), 22, "NO", "Tranches 1-2: duplex gardens, club pools, market plaza (F01)"),
 }
 
 # artistic depth of field on the ground-level shots: f-stop, focus on the shot's target point
