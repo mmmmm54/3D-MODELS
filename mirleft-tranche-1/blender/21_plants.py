@@ -561,7 +561,7 @@ def date_palm(seed, height, n_fronds=48, dates=True, M=None, lo=False):
         rb = 0.18 + 0.12 * age
         base = top + np.array([math.cos(az) * rb, math.sin(az) * rb, 0.72 - 0.75 * age])
         mats = ("v2_date_old" if age > 0.86 and r.random() < 0.6 else "v2_date_leaf", "v2_rachis")
-        _pinnate_frond(mb, r, base, az, el, droop, Lf, age, mats, nleaf=30 if lo else 82, spread=1.0 if age > 0.08 else 0.45, lo=lo)
+        _pinnate_frond(mb, r, base, az, el, droop, Lf, age, mats, nleaf=22 if lo else 82, spread=1.0 if age > 0.08 else 0.45, lo=lo)
     for k in range(r.randint(2, 3)):                            # dead fronds hanging under the crown
         az = r.uniform(0, 2 * math.pi)
         base = top + np.array([math.cos(az) * 0.3, math.sin(az) * 0.3, 0.05])
@@ -678,7 +678,7 @@ def washingtonia(seed, height, skirt=True, n_fronds=28, lo=False):
                         [(0, 0), (1, 0), (0.5, 1)])
         fdir = _n(pts[-1] - pts[-2]) + Z * 0.25
         mat = "v2_fan_old" if age > 0.85 and r.random() < 0.6 else "v2_fan"
-        _fan(mb, r, pts[-1], fdir, r.uniform(0.85, 1.05), mat, nseg=20 if lo else 46, droop=0.6 + 0.6 * age, lo=lo)
+        _fan(mb, r, pts[-1], fdir, r.uniform(0.85, 1.05), mat, nseg=15 if lo else 46, droop=0.6 + 0.6 * age, lo=lo)
     for k in range(2):                                          # the spear leaves, still folded
         p0 = top + Z * 0.5
         d = _n(Z + np.array([r.uniform(-0.2, 0.2), r.uniform(-0.2, 0.2), 0]))
@@ -1104,12 +1104,12 @@ def build_sources(M, col):
     return S
 
 
-LOD = {"DATE_PALM_V2_A": lambda: date_palm(4, 5.0, n_fronds=30, lo=True),
-       "DATE_PALM_V2_B": lambda: date_palm(7, 5.6, n_fronds=27, lo=True),
-       "DATE_PALM_V2_C": lambda: date_palm(12, 4.6, n_fronds=25, dates=False, lo=True),
+LOD = {"DATE_PALM_V2_A": lambda: date_palm(4, 5.0, n_fronds=28, lo=True),
+       "DATE_PALM_V2_B": lambda: date_palm(7, 5.6, n_fronds=25, lo=True),
+       "DATE_PALM_V2_C": "DATE_PALM_V2_A",
        "WASHINGTONIA_V2_A": lambda: washingtonia(1, 9.0, skirt=True, n_fronds=20, lo=True),
        "WASHINGTONIA_V2_B": lambda: washingtonia(3, 9.6, skirt=False, n_fronds=20, lo=True),
-       "WASHINGTONIA_V2_C": lambda: washingtonia(8, 8.4, skirt=True, n_fronds=20, lo=True),
+       "WASHINGTONIA_V2_C": "WASHINGTONIA_V2_A",
        "OLIVE_TREE_V2_A": lambda: olive(6, lo=True), "OLIVE_TREE_V2_B": lambda: olive(9, 3.8, 3.4, lo=True),
        "FOUNTAIN_GRASS_V2": lambda: grass(5, n=50, plumes=10, lo=True), "AGAVE_V2": lambda: agave(3, n=14, lo=True),
        "AGAVE_V2_SMALL": lambda: agave(8, n=12, length=0.5, lo=True), "LAVENDER_V2": lambda: lavender(6, needles=70, spikes=24, lo=True),
@@ -1118,13 +1118,17 @@ LOD = {"DATE_PALM_V2_A": lambda: date_palm(4, 5.0, n_fronds=30, lo=True),
 
 def build_lod(M, col):
     """the light versions of the sources (the light GLB for After Effects, client 27-10): the same plants with the same
-    materials and textures, about 25 times fewer triangles; {source mesh name: light object}"""
+    materials and textures, about 25 times fewer triangles; {source mesh name: light object}. A variant named
+    instead of built shares that light version (two date palms and two Washingtonias, a lighter file)"""
     materials(M)
     S = {}
     for k, make in LOD.items():
-        ob = source(k + "_LOD", make(), M, col)
-        ob.hide_render = ob.hide_viewport = True
-        S["SRC_" + k] = ob
+        if callable(make):
+            S["SRC_" + k] = ob = source(k + "_LOD", make(), M, col)
+            ob.hide_render = ob.hide_viewport = True
+    for k, make in LOD.items():
+        if not callable(make):
+            S["SRC_" + k] = S["SRC_" + make]
     return S
 
 
