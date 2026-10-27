@@ -535,6 +535,11 @@ planting along the walls as the pool reference, and in the big stairs going down
   every tread but the fountains', planted with the same drifts, a small olive tree every sixth planter.
 - **Pool park**: beds along the parapet, stone planters with agaves on the deck, jars by the kiosk, lavender along
   the path from the villas.
+- **The gardens' trees (27-10, "add palms and trees, something cool, on the duplex and villas, this looks empty")**:
+  each garden of the villas duplex, B, C and A gets a composition (`21_plants.garden_trees`): a grove of three date
+  palms of three heights in its far corner (on a gravel island with agaves and grasses where it stands in the lawn),
+  a pair of Washingtonias along its longest bed with flowering shrubs against the wall, one olive tree in the open
+  lawn (about 290 trees in all).
 - **Tranche 1's villas (27-10)**: the plan's palms and trees drawn in the strip outside a villa's garden wall are
   planted inside its garden, 1 m from the wall (27 of them); the trees inside a garden are smaller; the shade and
   street trees of the plan are olive trees from the library, so every tree of the site is a detailed one.
